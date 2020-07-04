@@ -1,5 +1,7 @@
 package com.game.model.entity;
 
+import java.util.Objects;
+
 public class BayEntity {
     private int groupId;
     private String groupName;
@@ -54,6 +56,24 @@ public class BayEntity {
 
     public void setResourceDescription(String resourceDescription) {
         this.resourceDescription = resourceDescription;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BayEntity bayEntity = (BayEntity) o;
+        return groupId == bayEntity.groupId &&
+                resourceId == bayEntity.resourceId &&
+                groupName.equals(bayEntity.groupName) &&
+                groupDescription.equals(bayEntity.groupDescription) &&
+                resourceName.equals(bayEntity.resourceName) &&
+                resourceDescription.equals(bayEntity.resourceDescription);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(groupId, groupName, groupDescription, resourceId, resourceName, resourceDescription);
     }
 
     @Override
