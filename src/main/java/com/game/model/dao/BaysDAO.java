@@ -14,11 +14,10 @@ public class BaysDAO {
     public List<BayEntity> getBayList(String jdbcDriver, String dbUrl,
                                       String userName, String userPass) {
         final String DB_SELECT_STATEMENT =
-                        "SELECT ResourcesGroups.id, ResourcesGroups.name, " +
-                        "ResourcesGroups.description,\n" +
-                        "Resources.name, Resources.description, Resources.group_id\n" +
-                        "FROM ResourcesGroups\n LEFT JOIN Resources " +
-                        "ON ResourcesGroups.id=Resources.group_id;";
+                                        "SELECT Bays.resource_id, Resources.name, Resources.description, " +
+                                        "Resources.group_id, ResourcesGroups.name, ResourcesGroups.description\n" +
+                                        "FROM  Bays LEFT JOIN Resources ON Bays.resource_id=Resources.id\n" +
+                                        "LEFT JOIN ResourcesGroups ON Resources.group_id=ResourcesGroups.id;";
 
         List<BayEntity> bayEntityList = new ArrayList<BayEntity>();
         downloadJdbcDriver(jdbcDriver);
@@ -57,7 +56,7 @@ public class BaysDAO {
     private void setEntityProperties(List<BayEntity> list, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             BayEntity bayEntity = new BayEntity();
-            bayEntity.setResourceId(resultSet.getInt("id"));
+            bayEntity.setResourceId(resultSet.getInt("resource_id"));
             bayEntity.setResourceName(resultSet.getString("Resources.name"));
             bayEntity.setResourceDescription(resultSet.getString("Resources.description"));
             bayEntity.setGroupId(resultSet.getInt("group_id"));

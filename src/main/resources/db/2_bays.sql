@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS ResourcesGroups
 */
 CREATE TABLE IF NOT EXISTS Resources
 (
-    id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id          INT PRIMARY KEY NOT NULL,
     name        varchar(50)     NOT NULL UNIQUE,
     description varchar(120)    NOT NULL,
     group_id    INT             NOT NULL,
@@ -42,27 +42,56 @@ CREATE TABLE IF NOT EXISTS Resources
 */
 INSERT INTO Bays
     (resource_id)
-VALUES (1),
-       (2),
-       (3),
-       (4),
-       (5);
+VALUES (11),
+       (12),
+       (13),
+       (14),
+       (15),
+       (16),
+       (17),
+       (18),
+       (19),
+       (20),
+       (21),
+       (22),
+       (23),
+       (24),
+       (25),
+       (26),
+       (27);
 
-INSERT INTO Resources
-    (name, description, group_id, permanent)
-VALUES ('Fuel', 'Toplivo', 3, true),
-       ('Missiles', 'Rakety', 3, true),
-       ('DroneParts', 'Zapchasti', 3, true),
-       ('Scrap', 'Kuski', 3, true),
-       ('Hull', 'Korpus', 3, true);
 
 INSERT INTO ResourcesGroups
     (name, description)
 VALUES ('Ships', 'Has max slots'),
-       ('Systems', 'Control lifecycle'),
+       ('Bays', 'Control lifecycle'),
        ('Resources', 'For move and fight'),
        ('Augmentations', 'Prokachka'),
        ('Weapons', 'Oruzhie'),
        ('People', 'Ludi'),
        ('Drones', 'Drony'),
-       ('Fighters', 'Boyci');
+       ('Fighters', 'Boyci'),
+       ('Upgrades', 'Usovershenstvovaniya'),
+       ('Achievements', 'Dostizheniya'),
+       ('Notification', 'Uvedomleniya'),
+       ('Dialogs', 'Razgovory');
+
+INSERT INTO Resources
+(id, name, description, group_id, permanent)
+VALUES (11, 'Shields', 'Schity', 2, true),
+       (12, 'Engines', 'Dvigately', 2, true),
+       (13, 'Oxygen', 'Kislorod', 2, true),
+       (14, 'Weapon Control', 'Upravlenie oruzhiem', 2, true),
+       (15, 'Drone Control', 'Upravlenie dronami', 2, true),
+       (16, 'Medbay', 'Sredniy otsek', 2, true),
+       (17, 'Crew Teleporter', 'Teleport comandy', 2, true),
+       (18, 'Cloaking', 'Maskirovka', 2, true),
+       (19, 'Artillery Beam', 'Artileristskiy luch', 2, true),
+       (20, 'Artillery Flak', 'Artileristskaya zenitka', 2, true),
+       (21, 'Clone Bay', 'Otsek klonirovaniya', 2, true),
+       (22, 'Mind Control', 'Control soznaniya', 2, true),
+       (23, 'Hacking', 'Vzlom', 2, true),
+       (24, 'Piloting', 'Pilotirovanie', 2, true),
+       (25, 'Sensors', 'Sensory', 2, true),
+       (26, 'Door System', 'Dvernaya systema', 2, true),
+       (27, 'Backup Batter', 'Rezervnaya batareya', 2, true);
