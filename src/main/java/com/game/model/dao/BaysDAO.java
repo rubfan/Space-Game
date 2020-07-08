@@ -17,7 +17,7 @@ public class BaysDAO {
                                         "SELECT Bays.resource_id, Resources.name, Resources.description, " +
                                         "Resources.group_id, ResourcesGroups.name, ResourcesGroups.description\n" +
                                         "FROM  Bays LEFT JOIN Resources ON Bays.resource_id=Resources.id\n" +
-                                        "LEFT JOIN ResourcesGroups ON Resources.group_id=ResourcesGroups.id;";
+                                        "LEFT JOIN ResourcesGroups ON Resources.group_id = ResourcesGroups.id;";
 
         List<BayEntity> bayEntityList = new ArrayList<BayEntity>();
         downloadJdbcDriver(jdbcDriver);
@@ -26,7 +26,7 @@ public class BaysDAO {
             connection = DriverManager.getConnection(dbUrl, userName, userPass);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(DB_SELECT_STATEMENT);
-            setEntityProperties(bayEntityList, resultSet);
+            prepareEntityProperties(bayEntityList, resultSet);
             resultSet.close();
             statement.close();
             connection.close();
@@ -53,7 +53,7 @@ public class BaysDAO {
         }
     }
 
-    private void setEntityProperties(List<BayEntity> list, ResultSet resultSet) throws SQLException {
+    private void prepareEntityProperties(List<BayEntity> list, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             BayEntity bayEntity = new BayEntity();
             bayEntity.setResourceId(resultSet.getInt("resource_id"));
@@ -66,5 +66,3 @@ public class BaysDAO {
         }
     }
 }
-
-

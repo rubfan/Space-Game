@@ -1,6 +1,5 @@
 package com.game.model.dao;
 
-import javafx.print.Collation;
 import org.junit.Test;
 
 import java.util.Collection;
@@ -16,10 +15,10 @@ public class BaysDAOTest {
     private BaysDAO baysDAO = new BaysDAO();
 
     @Test
-   public void getBayList() {
-       Collection collection = baysDAO.getBayList(JDBC_DRIVER, DATABASE_URL, USER, PASSWORD);
+    public void printBayList() {
+        Collection collection = baysDAO.getBayList(JDBC_DRIVER, DATABASE_URL, USER, PASSWORD);
         for (int i = 0; i < collection.size(); i++) {
             System.out.println(collection.toArray()[i].toString());
         }
-   }
+    }
 }

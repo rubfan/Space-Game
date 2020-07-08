@@ -14,7 +14,7 @@ CREATE TABLE Bays
   name varchar
   description varchar
 */
-CREATE TABLE IF NOT EXISTS ResourcesGroups
+CREATE TABLE ResourcesGroups
 (
     id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name        varchar(50)     NOT NULL UNIQUE,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS ResourcesGroups
   group_id int
   permanent boolean
 */
-CREATE TABLE IF NOT EXISTS Resources
+CREATE TABLE Resources
 (
     id          INT PRIMARY KEY NOT NULL,
     name        varchar(50)     NOT NULL UNIQUE,
@@ -37,6 +37,13 @@ CREATE TABLE IF NOT EXISTS Resources
     group_id    INT             NOT NULL,
     permanent   BOOLEAN
 );
+
+ALTER TABLE Bays
+    ADD FOREIGN KEY (resource_id) REFERENCES Resources(id);
+
+ALTER TABLE Resources
+    ADD FOREIGN KEY (group_id) REFERENCES ResourcesGroups(id);
+
 /*
 Добавить в этот файл SQL скрипты для заполнения таблиц данными из GoogleDocs.
 */
