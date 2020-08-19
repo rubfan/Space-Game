@@ -3,26 +3,25 @@ package com.game.controllers;
 import com.game.model.dao.AchievementDAO;
 import com.game.model.entity.AchievementEntity;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-public class AchievementsController extends HttpServlet {
+@Path("/achievement")
+public class AchievementsController {
     private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private final String DATABASE_LINK = "jdbc:mysql://localhost:3306/game?useUnicode=true&serverTimezone=UTC&useSSL=false";
+    private final String DATABASE_LINK = "jdbc:mysql://localhost:3306/game?allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=UTC&useSSL=false";
     private final String USER = "root";
     private final String PASS = "root";
 
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @GET
+    @Path("all")
+    @Produces(MediaType.TEXT_HTML)
+    public String doGet() {
         List<AchievementEntity> data = getDatabaseData();
-        String result = buildHtml(data);
-
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println(result);
+        return buildHtml(data);
     }
 
     private List<AchievementEntity> getDatabaseData() {
