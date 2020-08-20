@@ -1,34 +1,34 @@
 package com.game.model.dao;
 
-import com.game.model.entity.BayEntity;
+import com.game.model.entity.PeopleEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaysDAO {
+public class PeopleDAO {
     private String dbURL;
     private String user;
     private String password;
     private Connection connection;
     private Statement statement;
 
-    public List<BayEntity> getBayList() throws SQLException {
+    public List<PeopleEntity> getPeopleList() throws SQLException {
         final String DB_SELECT_STATEMENT =
-                "SELECT Bays.resource_id, Resources.name, Resources.description, " +
+                "SELECT People.resource_id, Resources.name, Resources.description, " +
                         "Resources.group_id, ResourcesGroups.name, ResourcesGroups.description" + "\n" +
-                        "FROM  Bays LEFT JOIN Resources ON Bays.resource_id=Resources.id" + "\n" +
+                        "FROM  People LEFT JOIN Resources ON People.resource_id=Resources.id" + "\n" +
                         "LEFT JOIN ResourcesGroups ON Resources.group_id = ResourcesGroups.id;";
 
-        List<BayEntity> bayEntityList = new ArrayList<BayEntity>();
+        List<PeopleEntity> shipEntityList = new ArrayList<PeopleEntity>();
         registrationJDBSDriver();
         ResultSet resultSet = creatingStatement().executeQuery(DB_SELECT_STATEMENT);
-        prepareEntityProperties(bayEntityList, resultSet);
+        prepareEntityProperties(shipEntityList, resultSet);
         resultSet.close();
         statement.close();
         connection.close();
 
-        return bayEntityList;
+        return shipEntityList;
     }
 
 
@@ -57,16 +57,16 @@ public class BaysDAO {
         this.password = password;
     }
 
-    private void prepareEntityProperties(List<BayEntity> list, ResultSet resultSet) throws SQLException {
+    private void prepareEntityProperties(List<PeopleEntity> list, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
-            BayEntity bayEntity = new BayEntity();
-            bayEntity.setResourceId(resultSet.getInt("resource_id"));
-            bayEntity.setResourceName(resultSet.getString("Resources.name"));
-            bayEntity.setResourceDescription(resultSet.getString("Resources.description"));
-            bayEntity.setGroupId(resultSet.getInt("group_id"));
-            bayEntity.setGroupName(resultSet.getString("ResourcesGroups.name"));
-            bayEntity.setGroupDescription(resultSet.getString("ResourcesGroups.description"));
-            list.add(bayEntity);
+            PeopleEntity peopleEntity = new PeopleEntity();
+            peopleEntity.setResourceId(resultSet.getInt("resource_id"));
+            peopleEntity.setResourceName(resultSet.getString("Resources.name"));
+            peopleEntity.setResourceDescription(resultSet.getString("Resources.description"));
+            peopleEntity.setGroupId(resultSet.getInt("group_id"));
+            peopleEntity.setGroupName(resultSet.getString("ResourcesGroups.name"));
+            peopleEntity.setGroupDescription(resultSet.getString("ResourcesGroups.description"));
+            list.add(peopleEntity);
         }
     }
 }
