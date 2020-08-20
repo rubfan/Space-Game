@@ -5,16 +5,16 @@ import org.junit.Test;
 import java.sql.SQLException;
 import java.util.Collection;
 
-public class ShipDAOTest {
+public class WeaponsDAOTest {
     private final String DATABASE_URL = "jdbc:mysql://localhost:3306/basebase";
     private final String USER = "root";
     private final String PASSWORD = "root";
-    private ShipsDAO shipsDAO = new ShipsDAO();
+    private WeaponsDAO weaponsDAO = new WeaponsDAO();
 
     @Test
-    public void printShipList() throws SQLException {
-        shipsDAO.createJDBCDateInformation(DATABASE_URL, USER, PASSWORD);
-        Collection collection = shipsDAO.getShipList();
+    public void printWeaponsList() throws SQLException {
+        weaponsDAO.createJDBCDateInformation(DATABASE_URL, USER, PASSWORD);
+        Collection collection = weaponsDAO.getWeaponList();
         for (int i = 0; i < collection.size(); i++) {
             System.out.println(collection.toArray()[i].toString());
         }

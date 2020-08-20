@@ -1,7 +1,9 @@
 package com.game.controllers;
 
-import com.game.model.dao.AchievementsDAO;
-import com.game.model.entity.AchievementEntity;
+import com.game.model.dao.PeopleDAO;
+import com.game.model.dao.ShipsDAO;
+import com.game.model.entity.PeopleEntity;
+import com.game.model.entity.ShipEntity;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,21 +13,21 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AchievementsController extends HttpServlet {
-    AchievementsDAO achievementsDAO = new AchievementsDAO();
-    List<AchievementEntity> date;
+public class PeopleController extends HttpServlet {
+    PeopleDAO peopleDAO = new PeopleDAO();
+    List<PeopleEntity> date;
     String title;
 
-    public void getDate(AchievementsDAO achievementsDAO) throws SQLException {
-        achievementsDAO.createJDBCDateInformation("jdbc:mysql://localhost:3306/basebase", "root", "root");
-        date = achievementsDAO.getAchievementList();
+    public void getDate(PeopleDAO peopleDAO) throws SQLException {
+        peopleDAO.createJDBCDateInformation("jdbc:mysql://localhost:3306/basebase", "root", "root");
+        date = peopleDAO.getPeopleList();
     }
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            getDate(achievementsDAO);
+            getDate(peopleDAO);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

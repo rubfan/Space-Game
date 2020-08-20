@@ -1,9 +1,8 @@
-﻿CREATE TABLE Ships
+﻿CREATE TABLE ResourcesGroups
 (
-    id          INT NOT NULL AUTO_INCREMENT,
-    resource_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (resource_id) REFERENCES Resources (id)
+    id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name        varchar(50)     NOT NULL UNIQUE,
+    description varchar(120)    NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Resources
@@ -15,6 +14,28 @@ CREATE TABLE IF NOT EXISTS Resources
     permanent   BOOLEAN      NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE Ships
+(
+    id          INT NOT NULL AUTO_INCREMENT,
+    resource_id INT NOT NULL,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO ResourcesGroups
+    (name, description)
+VALUES ('Ships', 'Has max slots'),
+       ('Bays', 'Control lifecycle'),
+       ('Equipments', 'For service and battle readiness'),
+       ('Augmentations', 'Prokachka'),
+       ('Weapons', 'Oruzhie'),
+       ('People', 'Ludi'),
+       ('Drones', 'Drony'),
+       ('Fighters', 'Boyci'),
+       ('Upgrades', 'Usovershenstvovaniya'),
+       ('Achievements', 'Dostizheniya'),
+       ('Notification', 'Uvedomleniya'),
+       ('Dialogs', 'Razgovory');
 
 INSERT INTO Ships
     (resource_id)
@@ -41,12 +62,3 @@ VALUES (1, 'The Kestrel Cruiser', 'Kreyser Pustelga', 1, true),
        (8, 'The Stealth Cruiser', 'Kreyser Nevidimka', 1, true),
        (9, 'The Lanius Cruiser', 'Kreyser Lanius', 1, true),
        (10, 'The Crystal Cruiser', 'Kreyser Kristall', 1, true);
-
-
-
-
-
-
-
-
-   

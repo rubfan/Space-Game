@@ -17,7 +17,11 @@ public class ServerStarter {
         context.addServlet(new ServletHolder(new WeaponsController()), "/weapon/all");
         context.addServlet(new ServletHolder(new NotificationsController()), "/notification/all");
         context.addServlet(new ServletHolder(new BaysController()), "/bay/all");
-        context.addServlet(new ServletHolder(new UpdatesController()), "/update/all");
+        context.addServlet(new ServletHolder(new UpgradesController()), "/upgrade/all");
+        context.addServlet(new ServletHolder(new EquipmentsController()), "/equipment/all");
+        context.addServlet(new ServletHolder(new AugmentationsController()), "/augmentation/all");
+        context.addServlet(new ServletHolder(new PeopleController()), "/people/all");
+        context.addServlet(new ServletHolder(new DronesController()), "/drone/all");
         server.setHandler(context);
         server.start();
         server.join();

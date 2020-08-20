@@ -1,52 +1,9 @@
-/*
-Создать таблицу Bays с полями:
-  id int
-  resource_id int
-*/
 CREATE TABLE Bays
 (
     id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     resource_id INT             NOT NULL
 );
-/*
-Если не создана то создать таблицу ResourcesGroups с полями:
-  id int
-  name varchar
-  description varchar
-*/
-CREATE TABLE ResourcesGroups
-(
-    id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name        varchar(50)     NOT NULL UNIQUE,
-    description varchar(120)    NOT NULL
 
-);
-/*
-Если не создана то создать таблицу Resources с полями:
-  id int
-  name varchar
-  description varchar
-  group_id int
-  permanent boolean
-*/
-CREATE TABLE Resources
-(
-    id          INT PRIMARY KEY NOT NULL,
-    name        varchar(50)     NOT NULL UNIQUE,
-    description varchar(120)    NOT NULL,
-    group_id    INT             NOT NULL,
-    permanent   BOOLEAN
-);
-
-ALTER TABLE Bays
-    ADD FOREIGN KEY (resource_id) REFERENCES Resources(id);
-
-ALTER TABLE Resources
-    ADD FOREIGN KEY (group_id) REFERENCES ResourcesGroups(id);
-
-/*
-Добавить в этот файл SQL скрипты для заполнения таблиц данными из GoogleDocs.
-*/
 INSERT INTO Bays
     (resource_id)
 VALUES (11),
@@ -66,22 +23,6 @@ VALUES (11),
        (25),
        (26),
        (27);
-
-
-INSERT INTO ResourcesGroups
-    (name, description)
-VALUES ('Ships', 'Has max slots'),
-       ('Bays', 'Control lifecycle'),
-       ('Resources', 'For move and fight'),
-       ('Augmentations', 'Prokachka'),
-       ('Weapons', 'Oruzhie'),
-       ('People', 'Ludi'),
-       ('Drones', 'Drony'),
-       ('Fighters', 'Boyci'),
-       ('Upgrades', 'Usovershenstvovaniya'),
-       ('Achievements', 'Dostizheniya'),
-       ('Notification', 'Uvedomleniya'),
-       ('Dialogs', 'Razgovory');
 
 INSERT INTO Resources
 (id, name, description, group_id, permanent)

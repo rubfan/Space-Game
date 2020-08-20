@@ -13,7 +13,6 @@ import java.util.List;
 
 public class ShipsController extends HttpServlet {
     ShipsDAO shipsDAO = new ShipsDAO();
-    ShipEntity shipEntity = new ShipEntity();
     List<ShipEntity> date;
     String title;
 
@@ -34,7 +33,7 @@ public class ShipsController extends HttpServlet {
         title = "    <th>ResourceId</th>\n" + "    <th>ResourceName</th>\n" + "    <th>ResourceDescription</th>\n" +
                 "    <th>GroupId</th>\n" + "    <th>GroupName</th>\n" + "    <th>GroupDescription</th>\n" + "  </tr>\n";
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < date.size(); i++) {
             title += "  <tr>\n" +
                     "    <td>" + date.get(i).getResourceId() + "</td>\n" +
                     "    <td>" + date.get(i).getResourceName() + "</td>\n" +

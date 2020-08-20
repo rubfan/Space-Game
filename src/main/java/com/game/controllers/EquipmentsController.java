@@ -1,7 +1,9 @@
 package com.game.controllers;
 
-import com.game.model.dao.AchievementsDAO;
-import com.game.model.entity.AchievementEntity;
+import com.game.model.dao.EquipmentsDAO;
+import com.game.model.dao.ShipsDAO;
+import com.game.model.entity.EquipmentEntity;
+import com.game.model.entity.ShipEntity;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,21 +13,21 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AchievementsController extends HttpServlet {
-    AchievementsDAO achievementsDAO = new AchievementsDAO();
-    List<AchievementEntity> date;
+public class EquipmentsController extends HttpServlet {
+    EquipmentsDAO equipmentsDAO = new EquipmentsDAO();
+    List<EquipmentEntity> date;
     String title;
 
-    public void getDate(AchievementsDAO achievementsDAO) throws SQLException {
-        achievementsDAO.createJDBCDateInformation("jdbc:mysql://localhost:3306/basebase", "root", "root");
-        date = achievementsDAO.getAchievementList();
+    public void getDate(EquipmentsDAO equipmentsDAO) throws SQLException {
+        equipmentsDAO.createJDBCDateInformation("jdbc:mysql://localhost:3306/basebase", "root", "root");
+        date = equipmentsDAO.getEquipmentList();
     }
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            getDate(achievementsDAO);
+            getDate(equipmentsDAO);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -33,7 +35,7 @@ public class AchievementsController extends HttpServlet {
         title = "    <th>ResourceId</th>\n" + "    <th>ResourceName</th>\n" + "    <th>ResourceDescription</th>\n" +
                 "    <th>GroupId</th>\n" + "    <th>GroupName</th>\n" + "    <th>GroupDescription</th>\n" + "  </tr>\n";
 
-        for (int i = 0; i < date.size(); i++) {
+        for (int i = 0; i < 5; i++) {
             title += "  <tr>\n" +
                     "    <td>" + date.get(i).getResourceId() + "</td>\n" +
                     "    <td>" + date.get(i).getResourceName() + "</td>\n" +

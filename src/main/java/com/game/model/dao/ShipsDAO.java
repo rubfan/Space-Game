@@ -70,6 +70,4 @@ public class ShipsDAO {
             list.add(shipEntity);
         }
     }
-
-
 }

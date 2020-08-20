@@ -1,34 +1,34 @@
 package com.game.model.dao;
 
-import com.game.model.entity.BayEntity;
+import com.game.model.entity.AugmentationEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaysDAO {
+public class AugmentationsDAO {
     private String dbURL;
     private String user;
     private String password;
     private Connection connection;
     private Statement statement;
 
-    public List<BayEntity> getBayList() throws SQLException {
+    public List<AugmentationEntity> getAugmentationList() throws SQLException {
         final String DB_SELECT_STATEMENT =
-                "SELECT Bays.resource_id, Resources.name, Resources.description, " +
+                "SELECT Augmentations.resource_id, Resources.name, Resources.description, " +
                         "Resources.group_id, ResourcesGroups.name, ResourcesGroups.description" + "\n" +
-                        "FROM  Bays LEFT JOIN Resources ON Bays.resource_id=Resources.id" + "\n" +
+                        "FROM  Augmentations LEFT JOIN Resources ON Augmentations.resource_id=Resources.id" + "\n" +
                         "LEFT JOIN ResourcesGroups ON Resources.group_id = ResourcesGroups.id;";
 
-        List<BayEntity> bayEntityList = new ArrayList<BayEntity>();
+        List<AugmentationEntity> augmentationEntityList = new ArrayList<AugmentationEntity>();
         registrationJDBSDriver();
         ResultSet resultSet = creatingStatement().executeQuery(DB_SELECT_STATEMENT);
-        prepareEntityProperties(bayEntityList, resultSet);
+        prepareEntityProperties(augmentationEntityList, resultSet);
         resultSet.close();
         statement.close();
         connection.close();
 
-        return bayEntityList;
+        return augmentationEntityList;
     }
 
 
@@ -57,16 +57,16 @@ public class BaysDAO {
         this.password = password;
     }
 
-    private void prepareEntityProperties(List<BayEntity> list, ResultSet resultSet) throws SQLException {
+    private void prepareEntityProperties(List<AugmentationEntity> list, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
-            BayEntity bayEntity = new BayEntity();
-            bayEntity.setResourceId(resultSet.getInt("resource_id"));
-            bayEntity.setResourceName(resultSet.getString("Resources.name"));
-            bayEntity.setResourceDescription(resultSet.getString("Resources.description"));
-            bayEntity.setGroupId(resultSet.getInt("group_id"));
-            bayEntity.setGroupName(resultSet.getString("ResourcesGroups.name"));
-            bayEntity.setGroupDescription(resultSet.getString("ResourcesGroups.description"));
-            list.add(bayEntity);
+            AugmentationEntity augmentationEntity = new AugmentationEntity();
+            augmentationEntity.setResourceId(resultSet.getInt("resource_id"));
+            augmentationEntity.setResourceName(resultSet.getString("Resources.name"));
+            augmentationEntity.setResourceDescription(resultSet.getString("Resources.description"));
+            augmentationEntity.setGroupId(resultSet.getInt("group_id"));
+            augmentationEntity.setGroupName(resultSet.getString("ResourcesGroups.name"));
+            augmentationEntity.setGroupDescription(resultSet.getString("ResourcesGroups.description"));
+            list.add(augmentationEntity);
         }
     }
 }

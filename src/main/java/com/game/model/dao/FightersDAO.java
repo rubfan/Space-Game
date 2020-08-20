@@ -1,34 +1,34 @@
 package com.game.model.dao;
 
-import com.game.model.entity.BayEntity;
+import com.game.model.entity.FighterEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaysDAO {
+public class FightersDAO {
     private String dbURL;
     private String user;
     private String password;
     private Connection connection;
     private Statement statement;
 
-    public List<BayEntity> getBayList() throws SQLException {
+    public List<FighterEntity> getFighterList() throws SQLException {
         final String DB_SELECT_STATEMENT =
-                "SELECT Bays.resource_id, Resources.name, Resources.description, " +
+                "SELECT Fighters.resource_id, Resources.name, Resources.description, " +
                         "Resources.group_id, ResourcesGroups.name, ResourcesGroups.description" + "\n" +
-                        "FROM  Bays LEFT JOIN Resources ON Bays.resource_id=Resources.id" + "\n" +
+                        "FROM  Fighters LEFT JOIN Resources ON Fighters.resource_id=Resources.id" + "\n" +
                         "LEFT JOIN ResourcesGroups ON Resources.group_id = ResourcesGroups.id;";
 
-        List<BayEntity> bayEntityList = new ArrayList<BayEntity>();
+        List<FighterEntity> fighterEntityList = new ArrayList<FighterEntity>();
         registrationJDBSDriver();
         ResultSet resultSet = creatingStatement().executeQuery(DB_SELECT_STATEMENT);
-        prepareEntityProperties(bayEntityList, resultSet);
+        prepareEntityProperties(fighterEntityList, resultSet);
         resultSet.close();
         statement.close();
         connection.close();
 
-        return bayEntityList;
+        return fighterEntityList;
     }
 
 
@@ -57,16 +57,16 @@ public class BaysDAO {
         this.password = password;
     }
 
-    private void prepareEntityProperties(List<BayEntity> list, ResultSet resultSet) throws SQLException {
+    private void prepareEntityProperties(List<FighterEntity> list, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
-            BayEntity bayEntity = new BayEntity();
-            bayEntity.setResourceId(resultSet.getInt("resource_id"));
-            bayEntity.setResourceName(resultSet.getString("Resources.name"));
-            bayEntity.setResourceDescription(resultSet.getString("Resources.description"));
-            bayEntity.setGroupId(resultSet.getInt("group_id"));
-            bayEntity.setGroupName(resultSet.getString("ResourcesGroups.name"));
-            bayEntity.setGroupDescription(resultSet.getString("ResourcesGroups.description"));
-            list.add(bayEntity);
+            FighterEntity fighterEntity = new FighterEntity();
+            fighterEntity.setResourceId(resultSet.getInt("resource_id"));
+            fighterEntity.setResourceName(resultSet.getString("Resources.name"));
+            fighterEntity.setResourceDescription(resultSet.getString("Resources.description"));
+            fighterEntity.setGroupId(resultSet.getInt("group_id"));
+            fighterEntity.setGroupName(resultSet.getString("ResourcesGroups.name"));
+            fighterEntity.setGroupDescription(resultSet.getString("ResourcesGroups.description"));
+            list.add(fighterEntity);
         }
     }
 }
